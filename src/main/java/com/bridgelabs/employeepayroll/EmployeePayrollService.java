@@ -1,11 +1,16 @@
 package com.bridgelabs.employeepayroll;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
 
 	public static ArrayList<EmployeePayroll> empData;
+	public EmployeePayrollService() {}
+	public EmployeePayrollService(List<EmployeePayroll> employeePayrollList) {
+		
+	}
 
 	public void readData(Scanner sc) {
 		System.out.println("Enter employee Id :- ");
@@ -18,7 +23,7 @@ public class EmployeePayrollService {
 	}
 
 	public void writeData() {
-		System.out.println("List Of Employee Payroll Data\n");
+		System.out.println("List Of Employee Payroll Data\n" + empData);
 		System.out.println(empData);
 	}
 
@@ -29,4 +34,4 @@ public class EmployeePayrollService {
 		employee.readData(sc);
 		employee.writeData();
 	}
-}
+	}
