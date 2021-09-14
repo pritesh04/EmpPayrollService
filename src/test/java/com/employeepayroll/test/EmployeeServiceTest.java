@@ -9,6 +9,7 @@ import com.bridgelabs.employeepayroll.EmployeePayrollService;
 import com.bridgelabs.employeepayroll.IOService;
 
 
+
 public class EmployeeServiceTest {
 	@Test
 	public void givenEmployeeWhenWrittenToFileShouldMatchEmployeeEntries() {
@@ -24,6 +25,13 @@ public class EmployeeServiceTest {
 		long entries=eps.countEnteries(IOService.FILE_IO);
 		org.junit.Assert.assertEquals(3, entries);
 	
+	}
+	
+	@Test
+	public void givenFileOnReadingFromFileShouldMatchEmployeeCount() {
+		EmployeePayrollService eps = new EmployeePayrollService();
+		long entries = eps.readEmployeePayrolData(IOService.FILE_IO);
+		org.junit.Assert.assertEquals(3,entries);
 	}
 	
 
