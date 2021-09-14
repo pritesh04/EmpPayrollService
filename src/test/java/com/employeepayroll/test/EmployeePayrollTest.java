@@ -19,6 +19,10 @@ public class EmployeePayrollTest {
 	private static String HOME = System.getProperty("user.home");
 	private static String PLAY_WITH_NIO = "TempPlayGround";
 
+	public EmployeePayrollTest(int i, String string, double d) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private static void deleteFolder(File file) {
 		for (File subFile : file.listFiles()) {
 			if (subFile.isDirectory()) {

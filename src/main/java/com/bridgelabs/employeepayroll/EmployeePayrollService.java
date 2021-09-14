@@ -7,12 +7,25 @@ import java.util.Scanner;
 public class EmployeePayrollService {
 
 	public static List<EmployeePayroll> empData;
-	public EmployeePayrollService() {}
+
+	public EmployeePayrollService() {
+	}
+
 	public EmployeePayrollService(List<EmployeePayroll> employeePayrollList) {
-		
+
 	}
 
 	public static ArrayList<EmployeePayroll> employeePayrollData;
+
+	public void writeEmployeePayrollData(IOService ioService) {
+		// System.out.println("\nWriting Employee Payroll Roaster to Console\n" +
+		// employeePayrollList);
+		if (ioService.equals(IOService.CONSOLE_IO)) {
+			System.out.println(employeePayrollData);
+		} else if (ioService.equals(IOService.FILE_IO)) {
+			new EmployeePayrollIo().writeData((ArrayList<EmployeePayroll>) empData);
+		}
+	}
 
 	public void readData(Scanner consoleInputReader) {
 		System.out.println("Enter employee Id :- ");
@@ -38,24 +51,25 @@ public class EmployeePayrollService {
 		EmployeePayrollService employee = new EmployeePayrollService();
 		Scanner sc = new Scanner(System.in);
 		employee.readData(sc);
-		
+
 	}
+
 	public void printData(IOService ioService) {
-		if(ioService.equals(IOService.FILE_IO)) {
+		if (ioService.equals(IOService.FILE_IO)) {
 			((EmployeePayrollIo) new EmployeePayrollIo()).printData();
 		}
 	}
-	
+
 	public long countEnteries(IOService ioService) {
-		if(ioService.equals(IOService.FILE_IO)) {
+		if (ioService.equals(IOService.FILE_IO)) {
 			return new EmployeePayrollIo().countEntries();
 		}
-		return  0;
+		return 0;
 	}
-	
+
 	public long readEmployeePayrolData(IOService IOService) {
-		if(IOService.equals(IOService.FILE_IO))
-			this.empData=new EmployeePayrollIo().readData();
+		if (IOService.equals(IOService.FILE_IO))
+			this.empData = new EmployeePayrollIo().readData();
 		return empData.size();
 	}
-	}
+}
