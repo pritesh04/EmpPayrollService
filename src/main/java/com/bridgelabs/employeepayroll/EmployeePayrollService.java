@@ -6,25 +6,31 @@ import java.util.Scanner;
 
 public class EmployeePayrollService {
 
-	public static ArrayList<EmployeePayroll> empData;
+	public static List<EmployeePayroll> empData;
 	public EmployeePayrollService() {}
 	public EmployeePayrollService(List<EmployeePayroll> employeePayrollList) {
 		
 	}
 
-	public void readData(Scanner sc) {
+	public static ArrayList<EmployeePayroll> employeePayrollData;
+
+	public void readData(Scanner consoleInputReader) {
 		System.out.println("Enter employee Id :- ");
-		int id = sc.nextInt();
+		int id = consoleInputReader.nextInt();
 		System.out.println("Enter name :- ");
-		String name = sc.next();
+		String name = consoleInputReader.next();
 		System.out.println("Enter salary :- ");
-		double salary = sc.nextDouble();
-		empData.add(new EmployeePayroll(id, name, salary));
+		double salary = consoleInputReader.nextDouble();
+		employeePayrollData.add(new EmployeePayroll(id, name, salary));
 	}
 
-	public void writeData() {
-		System.out.println("List Of Employee Payroll Data\n" + empData);
-		System.out.println(empData);
+	public void writeData(ArrayList<EmployeePayroll> employeePayrollData2) {
+		if (employeePayrollData2.equals(IOService.CONSOLE_IO)) {
+			System.out.println("List Of Employee Payroll Data\n");
+			System.out.println(employeePayrollData);
+		} else if (employeePayrollData2.equals(IOService.FILE_IO)) {
+			new EmployeePayrollService().writeData(employeePayrollData);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -32,6 +38,24 @@ public class EmployeePayrollService {
 		EmployeePayrollService employee = new EmployeePayrollService();
 		Scanner sc = new Scanner(System.in);
 		employee.readData(sc);
-		employee.writeData();
+		
+	}
+	public void printData(IOService ioService) {
+		if(ioService.equals(IOService.FILE_IO)) {
+			((EmployeePayrollIo) new EmployeePayrollIo()).printData();
+		}
+	}
+	
+	public long countEnteries(IOService ioService) {
+		if(ioService.equals(IOService.FILE_IO)) {
+			return new EmployeePayrollIo().countEntries();
+		}
+		return  0;
+	}
+	
+	public long readEmployeePayrolData(IOService IOService) {
+		if(IOService.equals(IOService.FILE_IO))
+			this.empData=new EmployeePayrollIo().readData();
+		return empData.size();
 	}
 	}
